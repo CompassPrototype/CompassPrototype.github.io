@@ -200,6 +200,46 @@
         margin-right: 15px;
     }
 
+    #popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #E6FBE3;
+        padding: 20px;
+        margin: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    input[type="text"],
+    input[type="email"] {
+        margin: auto;
+        display: block;
+        width: 200px;
+        padding: 8px;
+        border-radius: 4px;
+        border: 1px solid #2a9235;
+    }
+
+    #submitBtn {
+        background-color: #2a9235;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #submitBtn:hover {
+        background-color: #1e6b26;
+    }
+
     @media screen and (max-width: 1590px) {
         div {
             padding-left: 05%;
@@ -271,6 +311,18 @@
 
 
 <body>
+    <div id="popup" style="display: none;">
+        <label for="name">Name:</label>
+        <input type="text" id="name">
+        <br>
+        <label for="email">Email:</label>
+        <input type="email" id="email">
+        <br>
+        <div>
+            <button id="submitBtn">Submit</button>
+            <button id="close">Close</button>
+        </div>
+    </div>
     <div id="container">
         <div id="navbar">
             <nav>
@@ -284,7 +336,7 @@
             </div>
             <div class="bordered side-by-side centered">
                 <h2 class="centered">EGY KATTINTÁSRA A KEDVEZMÉNYEKTŐL</h4>
-                    <button class="mg-s-20 btn-fix"><strong>Előregisztráció</strong></button>
+                    <button class="mg-s-20 btn-fix subscribeBtn"><strong>Előregisztráció</strong></button>
             </div>
         </div>
 
@@ -300,7 +352,7 @@
                     vendéglátóhelyeidre! Gyűjts pontokat minden vásárlás után, hogy még több meglepetésben
                     részesülhess!
                     Csatlakozz hozzánk, és élvezd a gasztronómiai kalandokat egy egész új szinten!</p>
-                <button><strong>Előregisztráció</strong></button>
+                <button class="subscribeBtn"><strong>Előregisztráció</strong></button>
             </div>
             <img id="img2" src="imgs/nugets.png" alt="nugets">
         </div>
@@ -313,7 +365,7 @@
                     veszik az egyéni igényeket és korlátokat. Vonzó kuponok és kedvezmények segítségével lehetőséget
                     teremtünk arra, hogy mindenki megtalálja számára ideális ajánlatokat. Legyél részese te is egy olyan
                     közösségnek, ahol a te egyedi igényeid kerülnek előtérbe!</p>
-                <button><strong>Előregisztráció</strong></button>
+                <button class="subscribeBtn"><strong>Előregisztráció</strong></button>
             </div>
         </div>
         <div id="r">
@@ -328,7 +380,7 @@
                     területén, találkozhattok velünk, hogy mindig elérhetőek legyünk számotokra. Célunk, hogy ne csak
                     észrevegyétek, hanem aktívan részt
                     vegyetek az általunk nyújtott lehetőségekben. </p>
-                <button><strong>Előregisztráció</strong></button>
+                <button class="subscribeBtn"><strong>Előregisztráció</strong></button>
             </div>
             <img id="img4" src="imgs/pizza.png" alt="pizza">
         </div>
@@ -339,7 +391,7 @@
                 <p>Élvezd az exkluzív kuponokat és ajánlatokat, amelyekkel a ForFood segítségével könnyedén
                     megtalálhatod a város legjobb ízeit. Ráadásul mindez egy fillér kiadás nélkül! Csatlakozz most, és
                     indulj el az ízek kalandjára teljesen ingyenesen!</p>
-                <button><strong>Előregisztráció</strong></button>
+                <button class="subscribeBtn"><strong>Előregisztráció</strong></button>
             </div>
         </div>
         <div class="black h-20 white-font">
@@ -348,5 +400,46 @@
         </div>
     </div>
 </body>
+<script>
+    var subscribeButtons = document.querySelectorAll('.subscribeBtn');
+
+    subscribeButtons.forEach(function (button) {
+        button.addEventListener('click', function () {
+            document.getElementById('popup').style.display = 'block';
+        });
+    });
+    document.getElementById('close').addEventListener('click', function () {
+        document.getElementById('popup').style.display = 'none';
+    });
+    document.getElementById('submitBtn').addEventListener('click', function () {
+        var name = document.getElementById('name').value;
+        var email = document.getElementById('email').value;
+
+        var landingPageId = 1;
+
+        fetch('https://localhost:7266/api/InterestedUser/subscribe-to-service', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                landingpageId: landingPageId
+            })
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                alert('Subscription successful!');
+                document.getElementById('popup').style.display = 'none';
+            })
+            .catch(error => {
+                console.error('There was a problem with the fetch operation:', error);
+                alert('Subscription failed. Please try again later.');
+            });
+    });
+</script>
 
 </html>
