@@ -5,13 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For food</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200..800&display=swap" rel="stylesheet">
 </head>
 
 <style>
     * {
         margin: 0;
         padding: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        font-family: "Dosis", sans-serif;
     }
 
     div {
@@ -64,7 +67,7 @@
         background-color: #e6fbe3;
         display: grid;
         align-items: center;
-        padding-left: 15px;
+        padding-left: 22px;
     }
 
     #separator {
@@ -97,7 +100,7 @@
     }
 
     #p1 {
-        background-color: #ffc10770;
+        background-color: #4caf5050;
         padding-top: 20px;
         padding-bottom: 20px;
     }
@@ -109,7 +112,7 @@
     }
 
     #p3 {
-        background-color: #ffc10770;
+        background-color: #4caf5050;
         padding-top: 20px;
         padding-bottom: 20px;
     }
@@ -155,8 +158,8 @@
     .reasons {
         margin: auto;
         display: block;
-        width: 80%;
-        padding: 20px;
+        width: 100%;
+        padding: 0px;
     }
 
     .centered {
@@ -318,15 +321,15 @@
 
 <body>
     <div id="popup" style="display: none;">
-        <label for="name">Name:</label>
+        <label for="name">Név:</label>
         <input type="text" id="name">
         <br>
         <label for="email">Email:</label>
         <input type="email" id="email">
         <br>
         <div>
-            <button id="submitBtn">Submit</button>
-            <button id="close">Close</button>
+            <button id="submitBtn">Küldés</button>
+            <button id="close">Bezárás</button>
         </div>
     </div>
     <div id="container">
@@ -362,6 +365,9 @@
             </div>
             <img id="img2" src="imgs/nugets.png" alt="nugets">
         </div>
+        <div id="r">
+            <img class="reasons" src="imgs/reasons.png" alt="reasons">
+        </div>
         <div id="p2" class="side-by-side">
             <img id="img3" src="imgs/sushi.png" alt="sushi">
             <div class="p-0 p-t-10">
@@ -373,9 +379,6 @@
                     közösségnek, ahol a te egyedi igényeid kerülnek előtérbe!</p>
                 <button class="subscribeBtn"><strong>Előregisztráció</strong></button>
             </div>
-        </div>
-        <div id="r">
-            <img class="reasons" src="imgs/reasons.png" alt="reasons">
         </div>
         <div id="p3" class="side-by-side">
             <div class="p-0 p-t-10">
